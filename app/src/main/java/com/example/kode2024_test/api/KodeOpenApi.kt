@@ -1,6 +1,6 @@
 package com.example.kode2024_test.api
 
-import com.example.kode2024_test.data.dto.Response
+import com.example.kode2024_test.api.models.ResponseBody
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +9,7 @@ import retrofit2.http.GET
 
 interface KodeOpenApi {
     @GET("users")
-    suspend fun getResponse(): Response
+    suspend fun getResponse(): ResponseBody
 
     companion object {
         private const val BASE_URL = "https://stoplight.io/mocks/kode-api/trainee-test/331141861/"

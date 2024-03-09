@@ -1,8 +1,6 @@
-package com.example.kode2024_test.data.dto
+package com.example.kode2024_test.api.models
 
-import java.time.ZonedDateTime
-
-data class Employee(
+data class BodyItem(
     val id: String,
     val avatarUrl: String,
     val firstName: String,
@@ -10,6 +8,6 @@ data class Employee(
     val userTag: String,
     val department: String,
     val position: String,
-    val birthday: ZonedDateTime,
+    val birthday: String,
     val phone: String
 )
