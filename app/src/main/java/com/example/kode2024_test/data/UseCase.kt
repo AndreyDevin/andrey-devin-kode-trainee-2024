@@ -2,7 +2,6 @@ package com.example.kode2024_test.data
 
 import com.example.kode2024_test.data.dto.Employee
 import com.example.kode2024_test.ui.entity.Department
-import com.example.kode2024_test.ui.entity.Intent
 import com.example.kode2024_test.ui.entity.SortingOption
 import java.time.ZonedDateTime
 
@@ -46,15 +45,6 @@ class UseCase(
         }
         return data
     }
+
+    suspend fun getDetails(id: String) = repo.getResponse().filter { it.id == id }
 }
-    /*suspend fun getAll() = repo.getResponse()
-
-    suspend fun getDepartment(department: String) = getAll().filter { it.department == department }
-
-    suspend fun find(query: String) = getAll().filter {
-        it.firstName.contains(Regex(query, RegexOption.IGNORE_CASE)) ||
-        it.lastName.contains(Regex(query, RegexOption.IGNORE_CASE)) ||
-        it.userTag.contains(Regex(query, RegexOption.IGNORE_CASE))
-    }*/
-
-    //suspend fun getDetails(id: String) = getAll().filter { it.id == id }

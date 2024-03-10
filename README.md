@@ -66,7 +66,9 @@ HTTP FAILED: java.net.SocketException: socket failed: EPERM (Operation not permi
 - нет данных (Loading)
 - нет данных (Error)
 Оценочно 30 мин, подписаться на это в Activity + 20 мин.
-Фактически
+Фактически 200 мин :(
+- Причина сильного расхождения оценочного и фактического - пробовал варианты, как лучше сделать,
+- и в итоге переписал всю вьюмодель.
 
 7.
 Написать composable PersonDetails (50 мин)

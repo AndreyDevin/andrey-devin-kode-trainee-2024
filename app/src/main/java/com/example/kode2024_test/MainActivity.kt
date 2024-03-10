@@ -16,6 +16,7 @@ import com.example.kode2024_test.ui.entity.Intent
 import com.example.kode2024_test.ui.entity.SortingOption
 import com.example.kode2024_test.ui.entity.UiState
 import com.example.kode2024_test.ui.theme.Kode2024_testTheme
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,10 +26,20 @@ class MainActivity : ComponentActivity() {
 
         val viewModel: MainViewModel by viewModel<MainViewModel>()
 
-        viewModel.executeIntent(Intent.DepartmentSelect(Department.ANDROID))
-        viewModel.executeIntent(Intent.SortingSelect(SortingOption.ByBrithDay))
-        viewModel.executeIntent(Intent.Search("ari"))
-        viewModel.executeIntent(Intent.Refresh)
+        lifecycleScope.launch {
+            viewModel.executeIntent(Intent.DepartmentSelect(Department.ANDROID))
+            delay(2000)
+            viewModel.executeIntent(Intent.SortingSelect(SortingOption.ByBrithDay))
+            delay(2000)
+            viewModel.executeIntent(Intent.Search("ari"))
+            delay(4000)
+            viewModel.executeIntent(Intent.Search(""))
+            delay(10000)
+            viewModel.executeIntent(Intent.Details("514bec78-d65d-4140-81d7-e23fb3fc3ba8"))
+            delay(3000)
+            viewModel.executeIntent(Intent.DepartmentSelect(Department.ANDROID))
+        }
+
 
         lifecycleScope.launch {
             viewModel.state.collect { response ->
@@ -41,7 +52,8 @@ class MainActivity : ComponentActivity() {
                             color = MaterialTheme.colorScheme.background
                         ) {
                             val info =
-                                if (response is UiState.EmployeesList) response.list.toString()
+                                if (response is UiState.EmployeeDetails) response.employee.toString()
+                                else if (response is UiState.EmployeesList) response.list.toString()
                                 else response.toString()
                             Greeting( info )
                         }

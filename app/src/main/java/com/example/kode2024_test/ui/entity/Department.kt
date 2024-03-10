@@ -15,18 +15,3 @@ enum class Department(val title: String) {
     SUPPORT("support"),
     ANALYTICS("analytics")
 }
-
-/*val DEPARTMENT_LIST = listOf(
-    "android",
-    "ios",
-    "design",
-    "management",
-    "qa",
-    "back_office",
-    "frontend",
-    "hr",
-    "pr",
-    "backend",
-    "support",
-    "analytics"
-)*/
