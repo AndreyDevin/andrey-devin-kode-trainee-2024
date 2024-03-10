@@ -3,14 +3,68 @@ package com.example.kode2024_test
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kode2024_test.data.UseCase
-import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.ui.entity.Department
 import com.example.kode2024_test.ui.entity.Intent
+import com.example.kode2024_test.ui.entity.SortingOption
+import com.example.kode2024_test.ui.entity.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.time.ZonedDateTime
 
+class MainViewModel(
+    private val useCase: UseCase
+): ViewModel() {
+
+    private var department = Department.All
+        set(value) {
+            field = value
+            updateData()
+        }
+
+    private var searchField = ""
+        set(value) {
+            field = value
+            updateData()
+        }
+
+    private var sortingOption = SortingOption.ByAlphabet
+        set(value) {
+            field = value
+            updateData()
+        }
+
+    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Loading)
+    val state = _state.asStateFlow()
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            executeIntent(Intent.DepartmentSelect(Department.All))
+        }
+    }
+
+    fun executeIntent(intent: Intent) {
+        when(intent) {
+            is Intent.DepartmentSelect -> department = intent.department
+            is Intent.Search -> searchField = intent.searchField
+            is Intent.SortingSelect -> sortingOption = intent.option
+            is Intent.Details -> TODO()
+            Intent.Refresh -> updateData()
+        }
+    }
+
+    private fun updateData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _state.value = UiState.Loading
+            _state.value = UiState.EmployeesList(
+                list = useCase.updateData(department, searchField, sortingOption),
+                department = department,
+                sortingOption = sortingOption
+            )
+        }
+    }
+}
+/*
 class MainViewModel(
     private val useCase: UseCase
 ): ViewModel() {
@@ -89,3 +143,4 @@ class MainViewModel(
         }
     }
 }
+*/

@@ -1,6 +1,7 @@
 package com.example.kode2024_test.ui.entity
 
 enum class Department(val title: String) {
+    All("all"),
     ANDROID("android"),
     IOS("ios"),
     DESIGN("design"),
