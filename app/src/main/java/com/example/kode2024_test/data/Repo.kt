@@ -9,9 +9,9 @@ import java.time.ZoneId
 class Repo(
     private val api: KodeOpenApi
 ) {
-    suspend fun getResponse(): List<Employee> = api.getResponse().items.map { bodyItemToEmployee(it) }
+    suspend fun getResponse(): List<Employee> = api.getResponse().items.map { apiModelToEmployee(it) }
 
-    private fun bodyItemToEmployee(item: BodyItem): Employee {
+    private fun apiModelToEmployee(item: BodyItem): Employee {
         return Employee(
             id = item.id,
             avatarUrl = item.avatarUrl,

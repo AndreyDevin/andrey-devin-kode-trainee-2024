@@ -12,4 +12,6 @@ class UseCase(
         it.lastName.contains(Regex(query, RegexOption.IGNORE_CASE)) ||
         it.userTag.contains(Regex(query, RegexOption.IGNORE_CASE))
     }
+
+    //suspend fun getDetails(id: String) = getAll().filter { it.id == id }
 }

@@ -21,6 +21,9 @@ class MainActivity : ComponentActivity() {
 
         val viewModel: MainViewModel by viewModel<MainViewModel>()
 
+        viewModel.executeIntent(Intent.DataOptions.SingleDepartment(Department.ANDROID))
+        viewModel.executeIntent(Intent.SortingOption.ByBrithDay)
+
         lifecycleScope.launch {
             viewModel.state.collect { response ->
 
