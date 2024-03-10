@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.example.kode2024_test.ui.entity.Department
+import com.example.kode2024_test.ui.entity.Intent
 import com.example.kode2024_test.ui.theme.Kode2024_testTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +25,7 @@ class MainActivity : ComponentActivity() {
 
         viewModel.executeIntent(Intent.DataOptions.SingleDepartment(Department.ANDROID))
         viewModel.executeIntent(Intent.SortingOption.ByBrithDay)
+        viewModel.executeIntent(Intent.Refresh)
 
         lifecycleScope.launch {
             viewModel.state.collect { response ->

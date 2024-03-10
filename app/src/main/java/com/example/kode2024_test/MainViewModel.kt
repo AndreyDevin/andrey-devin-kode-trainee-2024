@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kode2024_test.data.UseCase
 import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.ui.entity.Intent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,6 +43,7 @@ class MainViewModel(
             is Intent.DataOptions.Search -> dataOptions = intent
             is Intent.DataOptions.Details -> dataOptions = intent
             is Intent.SortingOption -> sortingOption = intent
+            is Intent.Refresh -> executeDataOptions()
         }
     }
 
@@ -87,48 +89,3 @@ class MainViewModel(
         }
     }
 }
-
-sealed interface Intent {
-
-    sealed class DataOptions: Intent {
-        data object TotalList: DataOptions()
-        class SingleDepartment(val department: Department): DataOptions()
-        class Search(val searchField: String): DataOptions()
-        class Details(val employee: Employee): DataOptions()
-    }
-
-    enum class SortingOption: Intent {
-        ByAlphabet,
-        ByBrithDay
-    }
-}
-
-enum class Department(val title: String) {
-    ANDROID("android"),
-    IOS("ios"),
-    DESIGN("design"),
-    MANAGEMENT("management"),
-    QA("qa"),
-    BACK_OFFICE("back_office"),
-    FRONTEND("frontend"),
-    HR("hr"),
-    PR("pr"),
-    BACKEND("backend"),
-    SUPPORT("support"),
-    ANALYTICS("analytics")
-}
-/*val DEPARTMENT_LIST = listOf(
-    "android",
-    "ios",
-    "design",
-    "management",
-    "qa",
-    "back_office",
-    "frontend",
-    "hr",
-    "pr",
-    "backend",
-    "support",
-    "analytics"
-)*/
-
