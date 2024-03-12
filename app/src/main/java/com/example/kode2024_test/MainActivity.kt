@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.example.kode2024_test.ui.composable.Details
 import com.example.kode2024_test.ui.entity.Data
 import com.example.kode2024_test.ui.entity.Department
 import com.example.kode2024_test.ui.entity.Intent
@@ -31,13 +32,13 @@ class MainActivity : ComponentActivity() {
             delay(2000)
             viewModel.executeIntent(Intent.SortingSelect(SortingOption.ByBrithDay))
             delay(2000)
-            viewModel.executeIntent(Intent.Search("ari"))
-            delay(4000)
-            viewModel.executeIntent(Intent.Search(""))
-            delay(10000)
+            //viewModel.executeIntent(Intent.Search("ari"))
+            //delay(4000)
+            //viewModel.executeIntent(Intent.Search(""))
+            //delay(10000)
             viewModel.executeIntent(Intent.Details("514bec78-d65d-4140-81d7-e23fb3fc3ba8"))
-            delay(5000)
-            viewModel.executeIntent(Intent.OnBackPressed)
+            //delay(5000)
+            //viewModel.executeIntent(Intent.OnBackPressed)
         }
 
 
@@ -51,11 +52,16 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxSize(),
                             color = MaterialTheme.colorScheme.background
                         ) {
-                            val info =
-                                if (response.data is Data.EmployeeDetails) response.data.employee.toString()
-                                else if (response.data is Data.EmployeesList) response.data.list.toString()
-                                else response.toString()
-                            Greeting( info )
+                            if (response.data is Data.EmployeeDetails) Details(
+                                employee = response.data.employee,
+                                onBackPressed = { viewModel.executeIntent(Intent.OnBackPressed) }
+                            )
+                            else {
+                                val info =
+                                    if (response.data is Data.EmployeesList) response.data.list.toString()
+                                    else response.toString()
+                                Greeting(info)
+                            }
                         }
                     }
                 }

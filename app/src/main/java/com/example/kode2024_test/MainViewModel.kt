@@ -57,13 +57,13 @@ class MainViewModel(
 
             val data = useCase.updateData(department, searchField, sortingOption)
 
-            _state.value = UiState(
+            if (data.isNotEmpty()) _state.value = UiState(
                 UserChoice(department, searchField, sortingOption),
-                Data.EmployeesList(
-                    list = data,
-                    department = department,
-                    sortingOption = sortingOption
-                )
+                Data.EmployeesList(data)
+            )
+            else _state.value = UiState(
+                UserChoice(department, searchField, sortingOption),
+                Data.EmptyList
             )
         }
     }

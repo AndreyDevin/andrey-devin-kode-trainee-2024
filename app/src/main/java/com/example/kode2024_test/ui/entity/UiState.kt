@@ -14,15 +14,8 @@ data class UserChoice(
 )
 
 sealed class Data {
-
-    data class EmployeesList(
-        val list: List<Employee>,
-        val department: Department,
-        val sortingOption: SortingOption
-    ): Data()
-
+    data class EmployeesList(val list: List<Employee>): Data()
     data class EmployeeDetails(val employee: Employee): Data()
-
     data object EmptyList: Data()
     data object Loading: Data()
     data object Error: Data()
