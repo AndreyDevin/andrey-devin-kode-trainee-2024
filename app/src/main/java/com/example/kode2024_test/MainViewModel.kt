@@ -3,10 +3,12 @@ package com.example.kode2024_test
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kode2024_test.data.UseCase
+import com.example.kode2024_test.ui.entity.Data
 import com.example.kode2024_test.ui.entity.Department
 import com.example.kode2024_test.ui.entity.Intent
 import com.example.kode2024_test.ui.entity.SortingOption
 import com.example.kode2024_test.ui.entity.UiState
+import com.example.kode2024_test.ui.entity.UserChoice
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +22,13 @@ class MainViewModel(
     private var searchField = ""
     private var sortingOption = SortingOption.ByAlphabet
 
-    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Loading)
+    private val _state: MutableStateFlow<UiState> =
+        MutableStateFlow(
+            UiState(
+                UserChoice(department, searchField, sortingOption),
+                Data.Loading
+            )
+        )
     val state = _state.asStateFlow()
 
     init { updateData() }
@@ -35,29 +43,48 @@ class MainViewModel(
                 return
             }
             Intent.Refresh -> {}
+            Intent.OnBackPressed -> {}
         }
         updateData()
     }
 
     private fun updateData() {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.value = UiState.Loading
+            _state.value = UiState(
+                UserChoice(department, searchField, sortingOption),
+                Data.Loading
+            )
 
             val data = useCase.updateData(department, searchField, sortingOption)
 
-            _state.value = UiState.EmployeesList(
-                list = data,
-                department = department,
-                sortingOption = sortingOption
+            _state.value = UiState(
+                UserChoice(department, searchField, sortingOption),
+                Data.EmployeesList(
+                    list = data,
+                    department = department,
+                    sortingOption = sortingOption
+                )
             )
         }
     }
 
     private fun getDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _state.value = UiState(
+                UserChoice(department, searchField, sortingOption),
+                Data.Loading
+            )
+
             val data = useCase.getDetails(id)
-            if (data.isNotEmpty()) _state.value = UiState.EmployeeDetails(data.first())
-            else _state.value = UiState.EmptyList
+            if (data.isNotEmpty()) _state.value =
+                UiState(
+                    UserChoice(department, searchField, sortingOption),
+                    Data.EmployeeDetails(data.first())
+                )
+            else _state.value = UiState(
+                UserChoice(department, searchField, sortingOption),
+                Data.EmptyList
+            )
         }
     }
 }

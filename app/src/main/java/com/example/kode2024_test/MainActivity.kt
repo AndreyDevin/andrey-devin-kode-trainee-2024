@@ -11,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.example.kode2024_test.ui.entity.Data
 import com.example.kode2024_test.ui.entity.Department
 import com.example.kode2024_test.ui.entity.Intent
 import com.example.kode2024_test.ui.entity.SortingOption
-import com.example.kode2024_test.ui.entity.UiState
 import com.example.kode2024_test.ui.theme.Kode2024_testTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -36,8 +36,8 @@ class MainActivity : ComponentActivity() {
             viewModel.executeIntent(Intent.Search(""))
             delay(10000)
             viewModel.executeIntent(Intent.Details("514bec78-d65d-4140-81d7-e23fb3fc3ba8"))
-            delay(3000)
-            viewModel.executeIntent(Intent.DepartmentSelect(Department.ANDROID))
+            delay(5000)
+            viewModel.executeIntent(Intent.OnBackPressed)
         }
 
 
@@ -52,8 +52,8 @@ class MainActivity : ComponentActivity() {
                             color = MaterialTheme.colorScheme.background
                         ) {
                             val info =
-                                if (response is UiState.EmployeeDetails) response.employee.toString()
-                                else if (response is UiState.EmployeesList) response.list.toString()
+                                if (response.data is Data.EmployeeDetails) response.data.employee.toString()
+                                else if (response.data is Data.EmployeesList) response.data.list.toString()
                                 else response.toString()
                             Greeting( info )
                         }

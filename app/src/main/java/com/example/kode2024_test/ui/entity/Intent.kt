@@ -6,4 +6,5 @@ sealed class Intent {
     class Details(val id: String) : Intent()
     class SortingSelect(val option: SortingOption) : Intent()
     data object Refresh : Intent()
+    data object OnBackPressed : Intent()
 }

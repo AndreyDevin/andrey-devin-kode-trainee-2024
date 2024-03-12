@@ -2,17 +2,28 @@ package com.example.kode2024_test.ui.entity
 
 import com.example.kode2024_test.data.dto.Employee
 
-sealed class UiState {
+data class UiState (
+    val userChoice: UserChoice,
+    val data: Data
+)
 
-    class EmployeesList(
+data class UserChoice(
+    val department: Department,
+    val searchField: String,
+    val sortingOption: SortingOption
+)
+
+sealed class Data {
+
+    data class EmployeesList(
         val list: List<Employee>,
         val department: Department,
         val sortingOption: SortingOption
-    ): UiState()
+    ): Data()
 
-    class EmployeeDetails(val employee: Employee): UiState()
+    data class EmployeeDetails(val employee: Employee): Data()
 
-    data object EmptyList: UiState()
-    data object Loading: UiState()
-    data object Error: UiState()
+    data object EmptyList: Data()
+    data object Loading: Data()
+    data object Error: Data()
 }
