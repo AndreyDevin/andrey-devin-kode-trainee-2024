@@ -28,10 +28,10 @@ class MainActivity : ComponentActivity() {
         val viewModel: MainViewModel by viewModel<MainViewModel>()
 
         lifecycleScope.launch {
-            viewModel.executeIntent(Intent.DepartmentSelect(Department.ANDROID))
+            //viewModel.executeIntent(Intent.DepartmentSelect(Department.ANDROID))
             delay(2000)
-            viewModel.executeIntent(Intent.SortingSelect(SortingOption.ByBrithDay))
-            delay(2000)
+            //viewModel.executeIntent(Intent.SortingSelect(SortingOption.ByBrithDay))
+            //delay(2000)
             //viewModel.executeIntent(Intent.Search("ari"))
             //delay(4000)
             //viewModel.executeIntent(Intent.Search(""))
