@@ -71,7 +71,7 @@ HTTP FAILED: java.net.SocketException: socket failed: EPERM (Operation not permi
 - и в итоге переписал всю вьюмодель.
 
 6.1
-ѕрежде чем переходить к пункту 7, оп€ть изменил UiState.
+ѕо факту, прежде чем переходить к пункту 7, оп€ть изменил UiState.
 —делал, что это не только sealed class состо€ни€ данных, но и содержит в себе data class с выбором,
 который сделал пользователь: департамент, текст в поисковой строке, тип сортировки.
 “аким образом, при смене конфигурации устройства, всегда можно было восстановить состо€ние UI.
@@ -88,7 +88,13 @@ HTTP FAILED: java.net.SocketException: socket failed: EPERM (Operation not permi
 Ќаписать composable PersonsListItem (35 мин)
 и composable PersonsLazyColumn (35 мин)
 »того оценочно 70 мин.
-‘актически
+‘актически 180 мин...
+
+8.1
+ѕо факту, прежде чем переходить к пункту 9, помен€л реализацию BackPressed из экрана деталей,
+чтобы возвращатьс€ на список с сохраненной позицией скролинга.
+дл€ этого UiState.userChoice теперь имеет поле val lazyListState: LazyListState
+«ан€ло 50 мин.
 
 9.
 Ќаписать и потестить ScrollableTabRow со списком департаментов

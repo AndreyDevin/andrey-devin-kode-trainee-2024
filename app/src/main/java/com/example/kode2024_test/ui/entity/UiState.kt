@@ -1,5 +1,6 @@
 package com.example.kode2024_test.ui.entity
 
+import androidx.compose.foundation.lazy.LazyListState
 import com.example.kode2024_test.data.dto.Employee
 
 data class UiState (
@@ -10,7 +11,8 @@ data class UiState (
 data class UserChoice(
     val department: Department,
     val searchField: String,
-    val sortingOption: SortingOption
+    val sortingOption: SortingOption,
+    val lazyListState: LazyListState
 )
 
 sealed class Data {

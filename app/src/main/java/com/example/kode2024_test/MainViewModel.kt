@@ -1,5 +1,6 @@
 package com.example.kode2024_test
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kode2024_test.data.UseCase
@@ -21,11 +22,12 @@ class MainViewModel(
     private var department = Department.All
     private var searchField = ""
     private var sortingOption = SortingOption.ByAlphabet
+    private var lazyListState = LazyListState()
 
     private val _state: MutableStateFlow<UiState> =
         MutableStateFlow(
             UiState(
-                UserChoice(department, searchField, sortingOption),
+                UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.Loading
             )
         )
@@ -42,27 +44,31 @@ class MainViewModel(
                 getDetails(intent.id)
                 return
             }
+            Intent.OnBackPressed -> {
+                updateData()
+                return
+            }
             Intent.Refresh -> {}
-            Intent.OnBackPressed -> {}
         }
+        lazyListState = LazyListState()
         updateData()
     }
 
     private fun updateData() {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = UiState(
-                UserChoice(department, searchField, sortingOption),
+                UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.Loading
             )
 
             val data = useCase.updateData(department, searchField, sortingOption)
 
             if (data.isNotEmpty()) _state.value = UiState(
-                UserChoice(department, searchField, sortingOption),
+                UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.EmployeesList(data)
             )
             else _state.value = UiState(
-                UserChoice(department, searchField, sortingOption),
+                UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.EmptyList
             )
         }
@@ -71,18 +77,18 @@ class MainViewModel(
     private fun getDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = UiState(
-                UserChoice(department, searchField, sortingOption),
+                UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.Loading
             )
 
             val data = useCase.getDetails(id)
             if (data.isNotEmpty()) _state.value =
                 UiState(
-                    UserChoice(department, searchField, sortingOption),
+                    UserChoice(department, searchField, sortingOption, lazyListState),
                     Data.EmployeeDetails(data.first())
                 )
             else _state.value = UiState(
-                UserChoice(department, searchField, sortingOption),
+                UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.EmptyList
             )
         }
