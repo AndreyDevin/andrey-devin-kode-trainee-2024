@@ -23,6 +23,11 @@ fun MainScreen(
 
     Column {
 
+        BottomSheetDialog(
+            selectedSortingOption = state.userChoice.sortingOption,
+            intent = intent
+        )
+
         DepartmentsTabRow(tabState = tabState, onTabClick = intent)
 
         state.data.also { data ->
