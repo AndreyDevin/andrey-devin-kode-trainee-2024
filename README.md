@@ -99,7 +99,7 @@ HTTP FAILED: java.net.SocketException: socket failed: EPERM (Operation not permi
 9.
 Написать и потестить ScrollableTabRow со списком департаментов
 Оценочно 60 мин.
-Фактически
+Фактически 90 мин.
 
 10.
 Написать и потестить BottomSheet с вариантами фильтрации по алфавиту/по ДР
