@@ -27,24 +27,35 @@ class UseCase(
             SortingOption.ByAlphabet -> data = data.sortedBy { it.firstName }
 
             SortingOption.ByBrithDay -> {
-                val after = data.filter {
+                val inThisYear = data.filter {
                     it.birthday.dayOfYear >= ZonedDateTime.now().dayOfYear
                 }.sortedBy {
                     it.birthday.dayOfYear
                 }
 
-                val before = data.filter {
+                val inNextYear = data.filter {
                     it.birthday.dayOfYear < ZonedDateTime.now().dayOfYear
                 }.sortedBy {
                     it.birthday.dayOfYear
                 }
 
-                data = after.plus(before)
-                //state.value?.forEach { Log.d("MyTag", it.birthday.toString()) }
+                data = inThisYear.plus(createSpliterator()).plus(inNextYear)
             }
         }
         return data
     }
 
     suspend fun getDetails(id: String) = repo.getResponse().filter { it.id == id }
+
+    private fun createSpliterator() = Employee(
+        id = Employee.FLAG_TO_SHARE_WHEN_BIRTHDAY_IS_NEXT_YEAR,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ZonedDateTime.now().plusYears(1),
+        ""
+    )
 }

@@ -3,8 +3,10 @@ package com.example.kode2024_test.ui.composable
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +23,8 @@ import com.example.kode2024_test.ui.entity.Intent
 @Composable
 fun EmployeesListItem(
     employee: Employee,
-    clickListener: (Intent.Details) -> Unit
+    clickListener: (Intent.Details) -> Unit,
+    birthday: String
 ) {
     val textName = "${employee.firstName}  ${employee.lastName}"
     val textUserTag = employee.userTag.lowercase()
@@ -67,5 +70,14 @@ fun EmployeesListItem(
                 modifier = Modifier.alpha(0.6f)
             )
         }
+
+        if (birthday != "") Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterVertically)
+                .wrapContentWidth(Alignment.End)
+                .alpha(0.6f),
+            text = birthday
+        )
     }
 }

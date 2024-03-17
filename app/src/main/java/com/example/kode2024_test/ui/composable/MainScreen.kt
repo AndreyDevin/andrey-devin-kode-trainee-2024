@@ -39,6 +39,7 @@ fun MainScreen(
                 ) { CircularProgressIndicator() }
 
                 is Data.EmployeesList -> EmployeesList(
+                    sortingOption = state.userChoice.sortingOption,
                     list = data.list,
                     lazyListState = state.userChoice.lazyListState,
                     onItemClick = intent
