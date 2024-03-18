@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kode2024_test.R
-import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.domain.entity.Employee
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale

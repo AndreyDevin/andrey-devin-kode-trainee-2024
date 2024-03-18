@@ -1,8 +1,8 @@
-package com.example.kode2024_test.data
+package com.example.kode2024_test.domain
 
 import com.example.kode2024_test.api.KodeOpenApi
 import com.example.kode2024_test.api.models.BodyItem
-import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.domain.entity.Employee
 import java.time.LocalDate
 import java.time.ZoneId
 

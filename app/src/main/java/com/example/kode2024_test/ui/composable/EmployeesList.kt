@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.domain.entity.Employee
 import com.example.kode2024_test.ui.entity.Intent
 import com.example.kode2024_test.ui.entity.SortingOption
 import java.time.ZonedDateTime
@@ -20,30 +20,37 @@ fun EmployeesList(
     lazyListState: LazyListState,
     onItemClick: (Intent.Details) -> Unit
 ) {
-    if (sortingOption == SortingOption.ByAlphabet) {
-        LazyColumn(
-            modifier = Modifier.padding(start = 14.dp),
-            state = lazyListState
-        ) {
-            items(count = list.size) { index ->
-                EmployeesListItem(
-                    employee = list[index],
-                    clickListener = onItemClick,
-                    birthday = ""
-                )
+    when (sortingOption) {
+
+        SortingOption.ByAlphabet -> {
+            LazyColumn(
+                modifier = Modifier.padding(start = 14.dp),
+                state = lazyListState
+            ) {
+                items(count = list.size) { index ->
+                    EmployeesListItem(
+                        employee = list[index],
+                        clickListener = onItemClick,
+                        birthday = ""
+                    )
+                }
             }
         }
-    } else {
-        LazyColumn(
-            modifier = Modifier.padding(start = 14.dp, end = 14.dp),
-            state = lazyListState
-        ) {
-            items(count = list.size) { index ->
 
-                list[index].also { employee ->
-                    if (employee.id == Employee.FLAG_TO_SHARE_WHEN_BIRTHDAY_IS_NEXT_YEAR) {
-                        NextYearBirthdayDivider(text = employee.birthday.year.toString())
-                    } else {
+
+        SortingOption.ByBrithDay -> {
+            val dividerIndex =
+                list.indexOf(list.first { it.birthday.dayOfYear < ZonedDateTime.now().dayOfYear })
+
+            LazyColumn(
+                modifier = Modifier.padding(start = 14.dp, end = 14.dp),
+                state = lazyListState
+
+            ) {
+                items(count = list.size) { index ->
+
+                    list[index].also { employee ->
+                        if (dividerIndex == index) NextYearBirthdayDivider()
                         EmployeesListItem(
                             employee = employee,
                             clickListener = onItemClick,

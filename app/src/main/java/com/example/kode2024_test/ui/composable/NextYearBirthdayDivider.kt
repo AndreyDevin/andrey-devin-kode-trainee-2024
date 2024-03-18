@@ -12,9 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
+import java.time.ZonedDateTime
 
 @Composable
-fun NextYearBirthdayDivider(text: String) {
+fun NextYearBirthdayDivider() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,7 +35,7 @@ fun NextYearBirthdayDivider(text: String) {
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally)
         ) {
-            Text(text = text)
+            Text(text = ZonedDateTime.now().plusYears(1).year.toString())
         }
 
         Box(

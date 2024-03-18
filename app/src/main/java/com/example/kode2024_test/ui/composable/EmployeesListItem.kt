@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.domain.entity.Employee
 import com.example.kode2024_test.ui.entity.Intent
 
 @Composable

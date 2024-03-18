@@ -1,4 +1,4 @@
-package com.example.kode2024_test.data.dto
+package com.example.kode2024_test.domain.entity
 
 import java.time.ZonedDateTime
 
@@ -12,8 +12,5 @@ data class Employee(
     val position: String,
     val birthday: ZonedDateTime,
     val phone: String
-) {
-    companion object {
-        const val FLAG_TO_SHARE_WHEN_BIRTHDAY_IS_NEXT_YEAR = "FLAG"
-    }
-}
+)
+

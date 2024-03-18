@@ -1,6 +1,6 @@
-package com.example.kode2024_test.data
+package com.example.kode2024_test.domain
 
-import com.example.kode2024_test.data.dto.Employee
+import com.example.kode2024_test.domain.entity.Employee
 import com.example.kode2024_test.ui.entity.Department
 import com.example.kode2024_test.ui.entity.SortingOption
 import java.time.ZonedDateTime
@@ -39,23 +39,11 @@ class UseCase(
                     it.birthday.dayOfYear
                 }
 
-                data = inThisYear.plus(createSpliterator()).plus(inNextYear)
+                data = inThisYear.plus(inNextYear)
             }
         }
         return data
     }
 
     suspend fun getDetails(id: String) = repo.getResponse().filter { it.id == id }
-
-    private fun createSpliterator() = Employee(
-        id = Employee.FLAG_TO_SHARE_WHEN_BIRTHDAY_IS_NEXT_YEAR,
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ZonedDateTime.now().plusYears(1),
-        ""
-    )
 }

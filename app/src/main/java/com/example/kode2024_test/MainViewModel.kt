@@ -3,7 +3,7 @@ package com.example.kode2024_test
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kode2024_test.data.UseCase
+import com.example.kode2024_test.domain.UseCase
 import com.example.kode2024_test.ui.entity.Data
 import com.example.kode2024_test.ui.entity.Department
 import com.example.kode2024_test.ui.entity.Intent
