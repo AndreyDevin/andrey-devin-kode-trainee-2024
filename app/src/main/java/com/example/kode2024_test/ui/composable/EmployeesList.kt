@@ -40,7 +40,7 @@ fun EmployeesList(
 
         SortingOption.ByBrithDay -> {
             val dividerIndex =
-                list.indexOf(list.first { it.birthday.dayOfYear < ZonedDateTime.now().dayOfYear })
+                list.indexOfFirst { it.birthday.dayOfYear < ZonedDateTime.now().dayOfYear }
 
             LazyColumn(
                 modifier = Modifier.padding(start = 14.dp, end = 14.dp),
@@ -48,15 +48,13 @@ fun EmployeesList(
 
             ) {
                 items(count = list.size) { index ->
+                    if (dividerIndex == index) NextYearBirthdayDivider()
 
-                    list[index].also { employee ->
-                        if (dividerIndex == index) NextYearBirthdayDivider()
-                        EmployeesListItem(
-                            employee = employee,
-                            clickListener = onItemClick,
-                            birthday = birthDayToString(employee.birthday)
-                        )
-                    }
+                    EmployeesListItem(
+                        employee = list[index],
+                        clickListener = onItemClick,
+                        birthday = birthDayToString(list[index].birthday)
+                    )
                 }
             }
         }

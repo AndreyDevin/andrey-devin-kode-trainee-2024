@@ -22,10 +22,10 @@ fun MainScreen(
     val tabState = remember { mutableIntStateOf(state.userChoice.department.ordinal) }
 
     Column {
-
-        BottomSheetDialog(
-            selectedSortingOption = state.userChoice.sortingOption,
-            intent = intent
+        
+        Search(
+            state,
+            intent
         )
 
         DepartmentsTabRow(tabState = tabState, onTabClick = intent)
