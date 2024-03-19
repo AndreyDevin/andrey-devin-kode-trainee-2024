@@ -45,6 +45,8 @@ fun MainScreen(
                     onItemClick = intent
                 )
 
+                is Data.EmptyList -> SearchResultNothing()
+
                 else -> {}
             }
         }

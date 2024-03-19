@@ -116,7 +116,7 @@ HTTP FAILED: java.net.SocketException: socket failed: EPERM (Operation not permi
 Написать и потестить SearchField (поиск по имени/никнэйму).
 Реализовать при этом вариант "ничего не найдено".
 Оценочно 90 мин.
-Фактически
+Фактически 140 мин.
 
 12.
 Реализовать Pull-to-refresh

@@ -2,6 +2,7 @@ package com.example.kode2024_test.ui.composable
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -30,6 +31,7 @@ fun Search(
 
     SearchBar(
         modifier = Modifier
+            .fillMaxWidth()
             .padding(horizontal = 14.dp),
         query = text,
         onQueryChange = {
