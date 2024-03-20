@@ -121,7 +121,7 @@ HTTP FAILED: java.net.SocketException: socket failed: EPERM (Operation not permi
 12.
 Реализовать Pull-to-refresh
 Оценочно 60 мин.
-Фактически
+Фактически 80 мин.
 
 13.
 Отображение статуса загрузки данных (задача со звездочкой)
