@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
@@ -67,7 +70,8 @@ fun Details(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentWidth(Alignment.Start)
-                    .clickable { onBackPressed() }
+                    .clickable { onBackPressed() },
+                colorFilter = themeFilter()
             )
         }
 
@@ -103,7 +107,8 @@ fun Details(
         ) {
             Image(
                 painter = painterResource(R.drawable.baseline_star_border_24),
-                contentDescription = null
+                contentDescription = null,
+                colorFilter = themeFilter()
             )
             Text(
                 text = textBirthDay.toString(),
@@ -120,7 +125,8 @@ fun Details(
         Row {
             Image(
                 painter = painterResource(R.drawable.baseline_phone_24),
-                contentDescription = null
+                contentDescription = null,
+                colorFilter = themeFilter()
             )
             Text(
                 text = textPhone,
@@ -137,3 +143,9 @@ fun ageWordForm(age: Int): String {
         else -> "$age лет"
     }
 }
+
+@Composable
+fun themeFilter(): ColorFilter = ColorFilter.tint(
+    if (isSystemInDarkTheme()) Color.White
+    else Color.Black
+)

@@ -1,5 +1,6 @@
 package com.example.kode2024_test.ui.composable
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -40,9 +41,14 @@ fun DepartmentsTabRow(
             ) {
                 Text(
                     text = department.title,
-                    color = if (index == tabState.intValue) Color.Black else Color.Gray
+                    color = if (index == tabState.intValue) textColor() else Color.Gray
                 )
             }
         }
     }
 }
+
+@Composable
+fun textColor(): Color =
+    if (isSystemInDarkTheme()) Color.White
+    else Color.Black

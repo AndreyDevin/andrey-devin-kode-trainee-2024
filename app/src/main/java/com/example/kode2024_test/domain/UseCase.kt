@@ -15,7 +15,8 @@ class UseCase(
     ): List<Employee> {
         var data = repo.getResponse()
 
-        if (department != Department.All) data = data.filter { it.department == department.title }
+        if (department != Department.All) data =
+            data.filter { it.department == department.name.lowercase() }
 
         if (searchField != "") data = data.filter {
             it.firstName.contains(Regex(searchField, RegexOption.IGNORE_CASE)) ||

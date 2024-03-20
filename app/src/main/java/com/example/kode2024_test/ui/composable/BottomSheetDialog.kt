@@ -82,7 +82,15 @@ fun BottomSheetDialog(
                         }
                     )
                     Text(
-                        modifier = Modifier.align(Alignment.CenterVertically),
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .clickable {
+                                intent(Intent.SortingSelect(SortingOption.ByAlphabet))
+                                scope.launch {
+                                    sheetState.hide()
+                                }
+                            }
+                        ,
                         fontWeight = FontWeight.Bold,
                         text = "По алфавиту"
                         )
@@ -99,12 +107,19 @@ fun BottomSheetDialog(
                         }
                     )
                     Text(
-                        modifier = Modifier.align(Alignment.CenterVertically),
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .clickable {
+                                intent(Intent.SortingSelect(SortingOption.ByBrithDay))
+                                scope.launch {
+                                    sheetState.hide()
+                                }
+                            }
+                        ,
                         fontWeight = FontWeight.Bold,
                         text = "По дню рождения"
                     )
-                }                
-                
+                }
             }
         }
     }
