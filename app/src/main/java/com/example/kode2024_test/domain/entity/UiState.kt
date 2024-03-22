@@ -11,7 +11,8 @@ data class UserChoice(
     val department: Department,
     val searchField: String,
     val sortingOption: SortingOption,
-    val lazyListState: LazyListState
+    val lazyListState: LazyListState,
+    val errorGenerate: Boolean
 )
 
 sealed class Data {

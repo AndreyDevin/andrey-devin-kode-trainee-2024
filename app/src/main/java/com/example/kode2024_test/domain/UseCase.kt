@@ -9,8 +9,8 @@ import java.time.ZonedDateTime
 class UseCase(
     private val repo: Repo
 ) {
-    suspend fun updateData(id: String): Data {
-        repo.getData(true).also { response ->
+    suspend fun updateData(id: String, withError: Boolean): Data {
+        repo.getData(withError).also { response ->
             return when(response) {
 
                 is RepoResponse.SuccessResponse -> {
@@ -29,10 +29,11 @@ class UseCase(
     suspend fun updateData(
         department: Department,
         searchField: String,
-        sortingOption: SortingOption
+        sortingOption: SortingOption,
+        withError: Boolean
     ): Data {
 
-        repo.getData().also { response ->
+        repo.getData(withError).also { response ->
 
             when (response) {
                 is RepoResponse.SuccessResponse -> {
