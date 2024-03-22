@@ -17,6 +17,7 @@ import com.example.kode2024_test.domain.entity.Intent
 
 @Composable
 fun DepartmentsTabRow(
+    enabled: Boolean,
     tabState: MutableIntState,
     onTabClick: (Intent.DepartmentSelect) -> Unit
     ) {
@@ -33,6 +34,7 @@ fun DepartmentsTabRow(
         Department.entries.forEachIndexed { index, department ->
             Tab(
                 modifier = Modifier.height(40.dp),
+                enabled = enabled,
                 selected = index == tabState.intValue,
                 onClick = {
                     tabState.intValue = index

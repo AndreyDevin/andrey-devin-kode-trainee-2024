@@ -10,7 +10,7 @@ class UseCase(
     private val repo: Repo
 ) {
     suspend fun updateData(id: String): Data {
-        repo.getData().also { response ->
+        repo.getData(true).also { response ->
             return when(response) {
 
                 is RepoResponse.SuccessResponse -> {

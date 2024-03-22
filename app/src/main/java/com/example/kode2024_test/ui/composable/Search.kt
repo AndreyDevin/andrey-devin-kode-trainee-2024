@@ -24,6 +24,7 @@ import com.example.kode2024_test.domain.entity.UserChoice
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(
+    enabled: Boolean,
     state: UserChoice,
     intent: (Intent) -> Unit
 ) {
@@ -33,6 +34,7 @@ fun Search(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 14.dp),
+        enabled = enabled,
         query = text,
         onQueryChange = {
             text = it
@@ -44,7 +46,7 @@ fun Search(
         placeholder = { Text(text = state.searchField.ifBlank {"Введи имя, тег, почту..."}) },
         leadingIcon = {
             Icon(
-                modifier = Modifier.clickable { intent(Intent.Search(text)) },
+                modifier = Modifier.clickable(enabled = enabled) { intent(Intent.Search(text)) },
                 imageVector = Icons.Default.Search,
                 contentDescription = ""
             )
@@ -54,7 +56,7 @@ fun Search(
                 Icon(
                     modifier = Modifier
                         .padding(end = 10.dp)
-                        .clickable {
+                        .clickable(enabled = enabled) {
                             text = ""
                             intent(Intent.Search(text))
                                    },
@@ -62,6 +64,7 @@ fun Search(
                     contentDescription = "clear text"
                 )
                 BottomSheetDialog(
+                    enabled = enabled,
                     selectedSortingOption = state.sortingOption,
                     intent = intent
                 )

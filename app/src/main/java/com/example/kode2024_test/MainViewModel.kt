@@ -11,6 +11,7 @@ import com.example.kode2024_test.domain.entity.SortingOption
 import com.example.kode2024_test.domain.entity.UiState
 import com.example.kode2024_test.domain.entity.UserChoice
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -24,6 +25,7 @@ class MainViewModel(
     private var sortingOption = SortingOption.ByAlphabet
     private var lazyListState = LazyListState()
     private var detailsID = ""
+    private lateinit var savedState: UiState
 
     private val _state: MutableStateFlow<UiState> =
         MutableStateFlow(
@@ -64,10 +66,20 @@ class MainViewModel(
                 if (detailsID.isNotEmpty()) useCase.updateData(detailsID)
                 else useCase.updateData(department, searchField, sortingOption)
 
-            _state.value = UiState(
-                UserChoice(department, searchField, sortingOption, lazyListState),
-                data
-            )
+            if (data is Data.Error) {
+                _state.value = UiState(
+                    UserChoice(department, searchField, sortingOption, lazyListState),
+                    data
+                )
+                delay(3000)
+                _state.value = savedState
+            } else {
+                _state.value = UiState(
+                    UserChoice(department, searchField, sortingOption, lazyListState),
+                    data
+                )
+                savedState = _state.value
+            }
 
             detailsID = ""
         }
