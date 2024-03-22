@@ -31,7 +31,7 @@ fun MainScreen(
     state: UiState,
     intent: (Intent) -> Unit
 ) {
-    val enabled = !(state.data is Data.Error || state.data is Data.Loading)
+    val enabled = state.data !is Data.Error
     val tabState = remember { mutableIntStateOf(state.userChoice.department.ordinal) }
 
     val pullRefreshState = rememberPullToRefreshState()
@@ -65,7 +65,8 @@ fun MainScreen(
                                     .padding(15.dp),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
-                                text = "Loading..."
+                                text = "Loading...",
+                                color = Color.White
                             )
                         }
 
