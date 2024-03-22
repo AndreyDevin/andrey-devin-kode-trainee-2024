@@ -23,6 +23,7 @@ class MainViewModel(
     private var searchField = ""
     private var sortingOption = SortingOption.ByAlphabet
     private var lazyListState = LazyListState()
+    private var detailsID = ""
 
     private val _state: MutableStateFlow<UiState> =
         MutableStateFlow(
@@ -40,10 +41,7 @@ class MainViewModel(
             is Intent.DepartmentSelect -> department = intent.department
             is Intent.Search -> searchField = intent.searchField
             is Intent.SortingSelect -> sortingOption = intent.option
-            is Intent.Details -> {
-                getDetails(intent.id)
-                return
-            }
+            is Intent.Details -> detailsID = intent.id
             Intent.OnBackPressed -> {
                 updateData()
                 return
@@ -56,41 +54,22 @@ class MainViewModel(
 
     private fun updateData() {
         viewModelScope.launch(Dispatchers.IO) {
+
             _state.value = UiState(
                 UserChoice(department, searchField, sortingOption, lazyListState),
                 Data.Loading
             )
 
-            val data = useCase.updateData(department, searchField, sortingOption)
+            val data =
+                if (detailsID.isNotEmpty()) useCase.updateData(detailsID)
+                else useCase.updateData(department, searchField, sortingOption)
 
-            if (data.isNotEmpty()) _state.value = UiState(
-                UserChoice(department, searchField, sortingOption, lazyListState),
-                Data.EmployeesList(data)
-            )
-            else _state.value = UiState(
-                UserChoice(department, searchField, sortingOption, lazyListState),
-                Data.EmptyList
-            )
-        }
-    }
-
-    private fun getDetails(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
             _state.value = UiState(
                 UserChoice(department, searchField, sortingOption, lazyListState),
-                Data.Loading
+                data
             )
 
-            val data = useCase.getDetails(id)
-            if (data.isNotEmpty()) _state.value =
-                UiState(
-                    UserChoice(department, searchField, sortingOption, lazyListState),
-                    Data.EmployeeDetails(data.first())
-                )
-            else _state.value = UiState(
-                UserChoice(department, searchField, sortingOption, lazyListState),
-                Data.EmptyList
-            )
+            detailsID = ""
         }
     }
 }
