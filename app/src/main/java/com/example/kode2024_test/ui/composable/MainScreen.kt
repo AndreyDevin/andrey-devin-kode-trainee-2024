@@ -13,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import com.example.kode2024_test.ui.entity.Data
-import com.example.kode2024_test.ui.entity.Intent
-import com.example.kode2024_test.ui.entity.UiState
+import com.example.kode2024_test.domain.entity.Data
+import com.example.kode2024_test.domain.entity.Intent
+import com.example.kode2024_test.domain.entity.UiState
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +36,7 @@ fun MainScreen(
 
         Column {
 
-            Search(state = state.userChoice.sortingOption, intent = intent)
+            Search(state = state.userChoice, intent = intent)
 
             DepartmentsTabRow(tabState = tabState, onTabClick = intent)
 

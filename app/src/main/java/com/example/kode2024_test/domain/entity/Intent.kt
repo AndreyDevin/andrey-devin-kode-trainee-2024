@@ -1,4 +1,4 @@
-package com.example.kode2024_test.ui.entity
+package com.example.kode2024_test.domain.entity
 
 sealed class Intent {
     class DepartmentSelect(val department: Department) : Intent()

@@ -18,13 +18,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.kode2024_test.ui.entity.Intent
-import com.example.kode2024_test.ui.entity.SortingOption
+import com.example.kode2024_test.domain.entity.Intent
+import com.example.kode2024_test.domain.entity.UserChoice
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(
-    state: SortingOption,
+    state: UserChoice,
     intent: (Intent) -> Unit
 ) {
     var text by rememberSaveable { mutableStateOf("") }
@@ -41,7 +41,7 @@ fun Search(
         onSearch = {},
         active = false,
         onActiveChange = {},
-        placeholder = { Text(text = "Введи имя, тег, почту...") },
+        placeholder = { Text(text = state.searchField.ifBlank {"Введи имя, тег, почту..."}) },
         leadingIcon = {
             Icon(
                 modifier = Modifier.clickable { intent(Intent.Search(text)) },
@@ -62,7 +62,7 @@ fun Search(
                     contentDescription = "clear text"
                 )
                 BottomSheetDialog(
-                    selectedSortingOption = state,
+                    selectedSortingOption = state.sortingOption,
                     intent = intent
                 )
             }

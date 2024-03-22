@@ -1,8 +1,8 @@
 package com.example.kode2024_test.domain
 
 import com.example.kode2024_test.domain.entity.Employee
-import com.example.kode2024_test.ui.entity.Department
-import com.example.kode2024_test.ui.entity.SortingOption
+import com.example.kode2024_test.domain.entity.Department
+import com.example.kode2024_test.domain.entity.SortingOption
 import java.time.ZonedDateTime
 
 class UseCase(
@@ -13,7 +13,7 @@ class UseCase(
         searchField: String,
         sortingOption: SortingOption
     ): List<Employee> {
-        var data = repo.getResponse()
+        var data = repo.getData()
 
         if (department != Department.All) data =
             data.filter { it.department == department.name.lowercase() }
@@ -46,5 +46,5 @@ class UseCase(
         return data
     }
 
-    suspend fun getDetails(id: String) = repo.getResponse().filter { it.id == id }
+    suspend fun getDetails(id: String) = repo.getData().filter { it.id == id }
 }

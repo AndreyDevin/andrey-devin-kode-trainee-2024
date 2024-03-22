@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kode2024_test.domain.entity.Employee
-import com.example.kode2024_test.ui.entity.Intent
-import com.example.kode2024_test.ui.entity.SortingOption
+import com.example.kode2024_test.domain.entity.Intent
+import com.example.kode2024_test.domain.entity.SortingOption
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale

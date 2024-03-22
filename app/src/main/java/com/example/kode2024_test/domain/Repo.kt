@@ -9,7 +9,10 @@ import java.time.ZoneId
 class Repo(
     private val api: KodeOpenApi
 ) {
-    suspend fun getResponse(): List<Employee> = api.getResponse().items.map { apiModelToEmployee(it) }
+
+    suspend fun getData(withError: Boolean = false): List<Employee> = api
+        .getResponse(if (withError) ERROR_HEADER else SUCCESS_HEADER)
+        .body()?.items?.map { apiModelToEmployee(it) } ?: emptyList()
 
     private fun apiModelToEmployee(item: BodyItem): Employee {
         return Employee(
@@ -23,5 +26,10 @@ class Repo(
             birthday = LocalDate.parse(item.birthday).atStartOfDay(ZoneId.systemDefault()),
             phone = item.phone
         )
+    }
+
+    private companion object {
+        const val SUCCESS_HEADER = "Prefer: code=200, example=success"
+        const val ERROR_HEADER = "Prefer: code=500, example=error-500"
     }
 }

@@ -1,7 +1,6 @@
-package com.example.kode2024_test.ui.entity
+package com.example.kode2024_test.domain.entity
 
 import androidx.compose.foundation.lazy.LazyListState
-import com.example.kode2024_test.domain.entity.Employee
 
 data class UiState (
     val userChoice: UserChoice,

@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import com.example.kode2024_test.ui.composable.Details
 import com.example.kode2024_test.ui.composable.MainScreen
-import com.example.kode2024_test.ui.entity.Data
-import com.example.kode2024_test.ui.entity.Intent
+import com.example.kode2024_test.domain.entity.Data
+import com.example.kode2024_test.domain.entity.Intent
 import com.example.kode2024_test.ui.theme.Kode2024_testTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

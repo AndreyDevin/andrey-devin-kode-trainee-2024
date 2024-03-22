@@ -12,8 +12,8 @@ import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.kode2024_test.ui.entity.Department
-import com.example.kode2024_test.ui.entity.Intent
+import com.example.kode2024_test.domain.entity.Department
+import com.example.kode2024_test.domain.entity.Intent
 
 @Composable
 fun DepartmentsTabRow(
