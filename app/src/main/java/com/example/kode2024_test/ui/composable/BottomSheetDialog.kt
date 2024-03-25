@@ -30,7 +30,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetDialog(
-    enabled: Boolean,
     selectedSortingOption: SortingOption,
     intent: (Intent.SortingSelect) -> Unit
 ) {
@@ -39,7 +38,7 @@ fun BottomSheetDialog(
 
     Icon(
         modifier = Modifier
-            .clickable(enabled = enabled) {
+            .clickable {
                 scope.launch {
                     sheetState.show()
                 }

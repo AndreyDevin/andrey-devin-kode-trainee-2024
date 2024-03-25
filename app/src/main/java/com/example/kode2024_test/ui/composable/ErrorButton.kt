@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,6 +24,7 @@ fun ErrorButton(
     state: UiState,
     intent: (Intent) -> Unit
 ) {
+    var checked by remember { mutableStateOf(state.options.errorGenerate) }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -28,9 +33,12 @@ fun ErrorButton(
     ) {
         Row {
             Checkbox(
-                enabled = !(state.data is Data.Error || state.data is Data.Loading),
-                checked = state.userChoice.errorGenerate,
-                onCheckedChange = { intent(Intent.ErrorGenerate(!state.userChoice.errorGenerate)) }
+                enabled = state.data !is Data.Loading,
+                checked = checked,
+                onCheckedChange = {
+                    checked = !checked
+                    intent(Intent.ErrorGenerate(checked))
+                }
             )
             Text(text = "with\nerror")
         }
