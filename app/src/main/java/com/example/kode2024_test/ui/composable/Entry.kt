@@ -48,11 +48,7 @@ fun Entry(
 
         ErrorButton(
             state = state,
-            intent = {
-                viewModel.executeIntent(
-                    Intent.ErrorGenerate(!state.options.errorGenerate)
-                )
-            }
+            intent = viewModel::executeIntent
         )
 
         PullToRefreshContainer(
