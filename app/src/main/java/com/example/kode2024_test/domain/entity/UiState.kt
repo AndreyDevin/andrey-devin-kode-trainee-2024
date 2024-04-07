@@ -5,7 +5,7 @@ import androidx.compose.foundation.lazy.LazyListState
 data class UiState (
     val options: Options,
     val data: Data,
-    val info: Info?
+    val dataState: DataState?
 )
 
 data class Options(
@@ -19,9 +19,9 @@ data class Options(
 sealed class Data {
     data class EmployeesList(val list: List<Employee>): Data()
     data class EmployeeDetails(val employee: Employee): Data()
-    data class Error(val errorText: String) : Data(), Info
+    data class Error(val errorText: String) : Data(), DataState
     data object EmptyList: Data()
-    data object Loading: Data(), Info
+    data object Loading: Data(), DataState
 }
 
-interface Info
+interface DataState

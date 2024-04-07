@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kode2024_test.domain.UseCase
 import com.example.kode2024_test.domain.entity.Data
+import com.example.kode2024_test.domain.entity.DataState
 import com.example.kode2024_test.domain.entity.Department
-import com.example.kode2024_test.domain.entity.Info
 import com.example.kode2024_test.domain.entity.Intent
+import com.example.kode2024_test.domain.entity.Options
 import com.example.kode2024_test.domain.entity.SortingOption
 import com.example.kode2024_test.domain.entity.UiState
-import com.example.kode2024_test.domain.entity.Options
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,7 +27,7 @@ class MainViewModel(
     private var detailsID = ""
     private var withError = false
     private var data: Data = Data.EmptyList
-    private var info: Info? = null
+    private var dataState: DataState? = null
 
     private val _state: MutableStateFlow<UiState> = MutableStateFlow(stateCreate(Data.Loading))
     val state = _state.asStateFlow()
@@ -71,16 +71,16 @@ class MainViewModel(
     }
 
     private fun stateCreate(newData: Data): UiState {
-        if(newData is Info) info = newData
+        if(newData is DataState) dataState = newData
         else {
             data = newData
-            info = null
+            dataState = null
         }
 
         return UiState(
                 Options(department, searchField, sortingOption, lazyListState, withError),
                 data,
-                info
+                dataState
         )
     }
 }

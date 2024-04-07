@@ -44,7 +44,7 @@ fun Entry(
             )
         }
 
-        state.info?.let { Info(info = it) }
+        state.dataState?.let { DataState(dataState = it) }
 
         ErrorButton(
             state = state,
