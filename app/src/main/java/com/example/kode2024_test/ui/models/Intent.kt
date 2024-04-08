@@ -1,4 +1,7 @@
-package com.example.kode2024_test.domain.entity
+package com.example.kode2024_test.ui.models
+
+import com.example.kode2024_test.domain.entity.Department
+import com.example.kode2024_test.domain.entity.SortingOption
 
 sealed class Intent {
     class DepartmentSelect(val department: Department) : Intent()

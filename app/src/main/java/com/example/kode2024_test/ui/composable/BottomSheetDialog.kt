@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kode2024_test.domain.entity.Intent
+import com.example.kode2024_test.ui.models.Intent
 import com.example.kode2024_test.domain.entity.SortingOption
 import kotlinx.coroutines.launch
 

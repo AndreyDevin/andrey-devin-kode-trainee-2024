@@ -7,10 +7,10 @@ import com.example.kode2024_test.domain.UseCase
 import com.example.kode2024_test.domain.entity.Data
 import com.example.kode2024_test.domain.entity.DataState
 import com.example.kode2024_test.domain.entity.Department
-import com.example.kode2024_test.domain.entity.Intent
-import com.example.kode2024_test.domain.entity.Options
+import com.example.kode2024_test.ui.models.Intent
+import com.example.kode2024_test.ui.models.Options
 import com.example.kode2024_test.domain.entity.SortingOption
-import com.example.kode2024_test.domain.entity.UiState
+import com.example.kode2024_test.ui.models.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +29,7 @@ class MainViewModel(
     private var data: Data = Data.EmptyList
     private var dataState: DataState? = null
 
-    private val _state: MutableStateFlow<UiState> = MutableStateFlow(stateCreate(Data.Loading))
+    private val _state: MutableStateFlow<State> = MutableStateFlow(stateCreate(Data.Loading))
     val state = _state.asStateFlow()
 
     init { updateData() }
@@ -70,14 +70,14 @@ class MainViewModel(
         }
     }
 
-    private fun stateCreate(newData: Data): UiState {
+    private fun stateCreate(newData: Data): State {
         if(newData is DataState) dataState = newData
         else {
             data = newData
             dataState = null
         }
 
-        return UiState(
+        return State(
                 Options(department, searchField, sortingOption, lazyListState, withError),
                 data,
                 dataState

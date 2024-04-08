@@ -17,12 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kode2024_test.domain.entity.Data
-import com.example.kode2024_test.domain.entity.Intent
-import com.example.kode2024_test.domain.entity.UiState
+import com.example.kode2024_test.ui.models.Intent
+import com.example.kode2024_test.ui.models.State
 
 @Composable
 fun ErrorButton(
-    state: UiState,
+    state: State,
     intent: (Intent) -> Unit
 ) {
     var checked by rememberSaveable { mutableStateOf(state.options.errorGenerate) }

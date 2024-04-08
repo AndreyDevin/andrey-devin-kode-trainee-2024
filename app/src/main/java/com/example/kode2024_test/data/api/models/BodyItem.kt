@@ -1,4 +1,4 @@
-package com.example.kode2024_test.api.models
+package com.example.kode2024_test.data.api.models
 
 data class BodyItem(
     val id: String,

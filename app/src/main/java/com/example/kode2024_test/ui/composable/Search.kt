@@ -18,8 +18,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.kode2024_test.domain.entity.Intent
-import com.example.kode2024_test.domain.entity.Options
+import com.example.kode2024_test.ui.models.Intent
+import com.example.kode2024_test.ui.models.Options
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

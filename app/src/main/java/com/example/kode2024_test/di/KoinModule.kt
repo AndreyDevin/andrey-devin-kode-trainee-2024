@@ -1,8 +1,8 @@
 package com.example.kode2024_test.di
 
 import com.example.kode2024_test.MainViewModel
-import com.example.kode2024_test.api.KodeOpenApi
-import com.example.kode2024_test.domain.Repo
+import com.example.kode2024_test.data.api.KodeOpenApi
+import com.example.kode2024_test.data.Repo
 import com.example.kode2024_test.domain.UseCase
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

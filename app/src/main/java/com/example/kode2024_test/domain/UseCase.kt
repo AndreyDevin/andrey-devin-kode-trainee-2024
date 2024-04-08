@@ -1,5 +1,6 @@
 package com.example.kode2024_test.domain
 
+import com.example.kode2024_test.data.Repo
 import com.example.kode2024_test.domain.entity.Data
 import com.example.kode2024_test.domain.entity.Department
 import com.example.kode2024_test.domain.entity.RepoResponse

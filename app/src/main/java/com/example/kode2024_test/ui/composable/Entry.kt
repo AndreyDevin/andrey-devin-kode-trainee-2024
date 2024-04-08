@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.example.kode2024_test.MainViewModel
 import com.example.kode2024_test.domain.entity.Data
-import com.example.kode2024_test.domain.entity.Intent
+import com.example.kode2024_test.ui.models.Intent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

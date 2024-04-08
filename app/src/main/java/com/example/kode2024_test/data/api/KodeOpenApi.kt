@@ -1,6 +1,6 @@
-package com.example.kode2024_test.api
+package com.example.kode2024_test.data.api
 
-import com.example.kode2024_test.api.models.ResponseBody
+import com.example.kode2024_test.data.api.models.ResponseBody
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response

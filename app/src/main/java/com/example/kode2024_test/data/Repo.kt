@@ -1,7 +1,7 @@
-package com.example.kode2024_test.domain
+package com.example.kode2024_test.data
 
-import com.example.kode2024_test.api.KodeOpenApi
-import com.example.kode2024_test.api.models.BodyItem
+import com.example.kode2024_test.data.api.KodeOpenApi
+import com.example.kode2024_test.data.api.models.BodyItem
 import com.example.kode2024_test.domain.entity.Employee
 import com.example.kode2024_test.domain.entity.RepoResponse
 import retrofit2.HttpException

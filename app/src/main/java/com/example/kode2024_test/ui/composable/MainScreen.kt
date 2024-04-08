@@ -6,12 +6,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.example.kode2024_test.domain.entity.Data
-import com.example.kode2024_test.domain.entity.Intent
-import com.example.kode2024_test.domain.entity.UiState
+import com.example.kode2024_test.ui.models.Intent
+import com.example.kode2024_test.ui.models.State
 
 @Composable
 fun MainScreen(
-    state: UiState,
+    state: State,
     intent: (Intent) -> Unit
 ) {
     val tabState = remember { mutableIntStateOf(state.options.department.ordinal) }
